@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+    <title>Rokto Dorkar</title>
+</head>
+<body>
+    <!-- The sidebar -->
+   
+<div class="maindiv">
+    <div class="appbar">
+        <img id="appbar_icon" src="/static/icon.png" alt="">
+        <h1>Blood Donation</h1>
+    </div>
+    <div class="sidebar">
+        <a href="/main_page">Home</a>
+        <a href="/home_page">Account</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+    </div>
+      
+      <!-- Page content -->
+       <div class="content">
+       <button class="search_bar" onclick="togglePopup()">
+       
+           <p>Search for blood donors..</p>
+            <img class="search_icon" src="/static/searchicon.png" alt="">  
+        </button>
+        <div class="popup" id="popup">
+            <!-- Popup content -->
+            <div class="popup-content">
+                    <form method="post">
+                        {% csrf_token %}
+                        <label for="Blood Group">Select Your Blood Group:</label>
+                        <select class="ok_button" name="blood_group" id="blood_group">
+                          <option value="A+">A+</option>
+                          <option value="A-">A-</option>
+                          <option value="B+">B+</option>
+                          <option value="B-">B-</option>
+                          <option value="O+">O+</option>
+                          <option value="O-">O-</option>
+                          <option value="AB+">AB+</option>
+                          <option value="AB-">AB-</option>
+                        </select>
+                        <br><br>
+    
+                        <label for="Division">Select Your Division:</label>
+                        <select class="ok_button" name="division" id="division">
+                            
+                        </select>
+                        <br><br>
+                        <label for="District">Select Your District:</label>
+                        <select class="ok_button" name="district" id="district">
+                        
+                        </select>
+                        <br><br>
+                        <label for="SubDistrict">Select Your Sub District:</label>
+                        <select class="ok_button" name="subdistrict" id="subdistrict">
+                            
+                        </select>
+                        <br><br>
+                       
+                    <div class="ok_container">
+                        <button class="ok_button" onclick="togglePopup()">Search</button>
+                    </div>
+                    </form>
+                    
+            </div>
+        </div>
+     
+       {%for person in person%}
+       <div class="profile {% if forloop.counter0|divisibleby:2 %}even{% else %}odd{% endif %}">
+        <div class="person_info">
+            
+            <p>Name: <span class="pbold">{{person.name}}</span></p>
+            <p >Age: {{person.age}} </p>
+            <p>Blood group: <span class="pbold tcolor">{{person.blood_group}}</span></p>
+            <p >Mobile: <span class="pbold">{{person.mobile_number}}</span></p>
+            <p>Division: {{person.division}}</p>
+            <p>District: {{person.district}}</p>
+            <p>Subdistrict: {{person.subdistrict}}</p>
+
+        </div>
+        <div class="image_div">
+
+            <img class="personimg"src="/media/{{person.person_image}}" alt="Saboj iMage">
+                
+        </div>
+      
+
+</div>
+       {%endfor%}
+      
+
+      </div>
+</div>
+
+{{ country|json_script:"country" }};
+
+<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+    <title>Document</title>
+</head>
+<body>
+    <!-- The sidebar -->
+    
+<div class="maindiv">
+    <div class="appbar">
+        <img id="appbar_icon" src="/static/icon.png" alt="">
+        <h1>Blood Donation</h1>
+    </div>
+    <div class="sidebar">
+        <a class="active" href="/main_page">Home</a>
+        <a href="/home_page">Account</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+    </div>
+      
+      <!-- Page content -->
+       <div class="content">
+
+        <div class="mfrom">    
+            
+            <form method="post" class="sfore" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required><br><br>
+            
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required><br><br>
+            
+                <label for="blood_group">Blood Group:</label>
+                <input type="text" id="blood_group" name="blood_group" required><br><br>
+            
+                <label for="mobile_number">Mobile_number:</label>
+                <input type="text" id="mobile_number" name="mobile_number" required><br><br>
+                
+                <label for="division">Division:</label>
+                {% comment %} <input type="text" id="division" name="division" required><br><br> {% endcomment %}
+                <select  name="division" id="account_division" onclick="updateAccountDivision()">
+                  <option value="" disabled selected>Select Division</option>
+                </select>
+                <br><br>
+                <label for="district">District:</label>
+                <select name="district" id="account_district" >
+                    <option value="" disabled selected>Select District</option>
+                </select>
+                <br><br>
+                <label for="subdistrict">Subdistrict:</label>
+                <select name="subdistrict" id="account_subdistrict">
+                    <option value="" disabled selected>Select Subdistrict</option>
+                </select>
+                <br><br>
+                <label for="lastdonate">Last Date:</label>
+                <input type="date" id="lastdonate" name="lastdonate" required><br><br>
+                
+                <label for="person_image">Profile Pic:</label>
+                <input type="file" id="person_image" name="person_image" required><br><br>
+                
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+       </div>
+       
+</div>
+<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

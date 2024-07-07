@@ -1,0 +1,242 @@
+*{
+    margin: 0 auto;
+}
+.mfrom
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h1{
+    
+    text-align: center;
+
+}
+/* The side navigation menu */
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+  }
+  
+  /* Sidebar links */
+  .sidebar a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+  }
+  
+  /* Active/current link */
+  .sidebar a.active {
+    
+    /* background-color: rgb(187, 185, 185); */
+    /* color: white; */
+  }
+  
+  /* Links on mouse-over */
+  .sidebar a:hover:not(.active) {
+    background-color: white;
+    color: black;
+  }
+  
+  /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+  
+  /* On screens that are less than 700px wide, make the sidebar into a topbar */
+  @media screen and (max-width: 700px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .sidebar a {float: left;}
+    div.content {margin-left: 0;}
+  }
+  
+  /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+  @media screen and (max-width: 400px) {
+    .sidebar a {
+      text-align: center;
+      float: none;
+    }
+  }
+  
+  .appbar {
+    
+    width: 100%;
+    line-height: 50px;
+    color: white;
+    background:  #f1f1f1;
+   
+    
+  }
+  .appbar h1{
+    
+    /* background: linear-gradient(to right, blue, green); */
+    color: rgb(207, 70, 70);
+    
+  }
+  
+  div.content {
+
+    
+    margin-left: 200px;
+    height: 1000px;
+    /* background-color: aqua; */
+  
+  }
+  #appbar_icon{
+    
+    float: left;
+    width: 60px;
+    height: 50px;
+    
+  }
+.profile{
+  
+  display: flex;
+  height: 250px;
+  overflow: hidden;
+  border-radius: .5em;
+  border: 2px  solid rgb(247, 247, 247);
+ 
+  background-color: rgb(245, 240, 240);
+  
+
+}
+.person_info{
+  padding: 20px;
+  margin-left: 0px;
+}
+.person_info h4,p{
+            margin: 10px 0; /* Adjust the value as needed */
+}
+
+.image_div{
+  margin-right: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+
+.personimg{
+
+  max-width: 100%;
+  max-height: 100%;
+  align-items: center;
+  object-fit: fill;
+
+}
+.pbold{
+
+  font-weight: bold;
+}
+.tcolor{
+  color: red;
+}
+.even {
+  background-color:  #f0f0f0;
+  
+}
+.odd {
+  /* background-color: rgb(245, 235, 235); */
+  background-color: #e0e0e0;
+}
+.image_button{
+  width: 100%;
+  display: flex;
+  margin-right: 0px;
+}
+
+.search_bar{
+  
+  color: #090909;
+  padding: 0.7em 1.7em;
+  font-size: 18px;
+  border-radius: 0.5em;
+  background: rgb(245, 243, 243);
+  cursor: pointer;
+  border: 1px solid grey;
+  transition: all 0.3s;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+  width: 100%;
+  display: flex;
+}
+.search_bar:active{
+  color: #666;
+  box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+}
+.search_icon{
+  align-items: center;
+  justify-content: center;
+  margin-right: 0px;
+  height: 30px;
+
+}
+
+.popup {
+
+  display: none; 
+  position: fixed;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  width: 30%;
+  height: 400px;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.popup-content {
+  /* text-align: center; */
+  position: relative;
+  height: 100%;
+  width: 100%;
+
+
+}
+
+.ok_button {
+
+  font-size: 20px;
+  padding: 0.6em 0.8em;
+  border-radius: 0.5em;
+  border: none;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 2px 2px 3px #000000b4;
+}
+
+.ok_container {
+
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+  transform: translateX(50%);
+  padding: 3px;
+  background: linear-gradient(90deg, #03a9f4, #f441a5);
+  border-radius: 0.9em;
+  transition: all 0.4s ease;
+
+}
+
+.ok_container::before {
+
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.ok_container:hover::before {
+  
+}
+.ok_container:active::before {
+  
+}
