@@ -1,5 +1,5 @@
 
- function togglePopup() {
+function togglePopup() {
     
     var popup = document.getElementById("popup");
     if(popup.style.display =="block"){
@@ -122,8 +122,9 @@ function updateAccountDistricts() {
         }
       
     }
-    districtSelect.addEventListener("change", updateAccountSubDistricts());
-    updateAccountSubDistricts()
+    districtSelect.addEventListener("change", updateAccountSubDistricts);
+    
+    updateAccountSubDistricts();
 }
 
 function updateAccountSubDistricts() {
@@ -152,3 +153,7 @@ function updateAccountSubDistricts() {
     }
     
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    updateAccountDivision();
+});

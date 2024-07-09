@@ -44,8 +44,7 @@
                 <input type="text" id="mobile_number" name="mobile_number" required><br><br>
                 
                 <label for="division">Division:</label>
-                {% comment %} <input type="text" id="division" name="division" required><br><br> {% endcomment %}
-                <select  name="division" id="account_division" onclick="updateAccountDivision()">
+                <select  name="division" id="account_division" >
                   <option value="" disabled selected>Select Division</option>
                 </select>
                 <br><br>
@@ -71,6 +70,8 @@
        </div>
        
 </div>
+
+{{ country|json_script:"country" }};
 <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
