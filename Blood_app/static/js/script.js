@@ -157,3 +157,19 @@ function updateAccountSubDistricts() {
 document.addEventListener("DOMContentLoaded", function() {
     updateAccountDivision();
 });
+
+function account_form() {
+    
+    var popup = document.getElementsByClassName("account_form")[0];
+    var account_info = document.getElementsByClassName("account_info")[0];
+
+    if(popup.style.display =="block"){
+        
+        account_info.style.display = "block";
+        popup.style.display = "none";
+    }
+    else {
+        account_info.style.display = "none";
+        popup.style.display = "block";
+    }
+}

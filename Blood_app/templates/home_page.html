@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css'%}">
-    <title>Document</title>
+    <title>Account</title>
 </head>
 <body>
     <!-- The sidebar -->
@@ -26,46 +26,127 @@
       
       <!-- Page content -->
        <div class="content">
+        
+           <img class = "profile_pic" src="/static/mine.jpg" alt="Profile pic">
+           <br><br>
+        <div class="account_form">    
+            
 
-        <div class="mfrom">    
-            
-            <form method="post" class="sfore" enctype="multipart/form-data">
+            <button class="account_edit" onclick="account_form()">
+                <img class="account_edit_icon" src="/static/edit_cancel_icon.png" alt="jkdfja">
+                <p>Cancel Edit</p>
+            </button><br>
+
+
+
+
+            <form method="post" class="sfore" enctype="multipart/form-data" onsubmit="account_form()" >
                 {% csrf_token %}
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required><br><br>
+                <label for="person_image" class="person_image">Choose profile pic</label><br>
+                <input type="file" class="person_image" name="person_image"  required><br><br>
+               
+                <label for="name">Name</label><br>
+                <input type="text" class="account_input" id="name" name="name" placeholder = "ex: David Miller" required><br><br>
             
-                <label for="age">Age:</label>
-                <input type="number" id="age" name="age" required><br><br>
+                <label for="age">Age</label><br>
+                <input type="number"  class="account_input"id="age" name="age" placeholder = "ex: 24" required><br><br>
             
-                <label for="blood_group">Blood Group:</label>
-                <input type="text" id="blood_group" name="blood_group" required><br><br>
-            
-                <label for="mobile_number">Mobile_number:</label>
-                <input type="text" id="mobile_number" name="mobile_number" required><br><br>
+               
+                <label for="blood_group Group">Blood Group</label><br>
+                        <select name="blood_group" class="account_input" id="blood_group">
+                            
+                          <option value="" disabled selected>ex: A+</option>
+                          <option value="A+">A+</option>
+                          <option value="A-">A-</option>
+                          <option value="B+">B+</option>
+                          <option value="B-">B-</option>
+                          <option value="O+">O+</option>
+                          <option value="O-">O-</option>
+                          <option value="AB+">AB+</option>
+                          <option value="AB-">AB-</option>
+                        </select>
+
+                <br><br>
+                <label for="mobile_number">Contact</label><br>
+                <input type="text"  class="account_input" id="mobile_number" name="mobile_number" placeholder="ex: 01712008015" required><br><br>
                 
-                <label for="division">Division:</label>
-                <select  name="division" id="account_division" >
+                <label for="division">Division:</label><br>
+                <select  class="account_input" name="division" id="account_division" >
                   <option value="" disabled selected>Select Division</option>
                 </select>
                 <br><br>
-                <label for="district">District:</label>
-                <select name="district" id="account_district" >
+                <label for="district">District:</label><br>
+                <select name="district" class="account_input" id="account_district" >
                     <option value="" disabled selected>Select District</option>
                 </select>
                 <br><br>
-                <label for="subdistrict">Subdistrict:</label>
-                <select name="subdistrict" id="account_subdistrict">
+                <label for="subdistrict">Subdistrict:</label><br>
+                <select name="subdistrict" class="account_input" id="account_subdistrict">
                     <option value="" disabled selected>Select Subdistrict</option>
                 </select>
                 <br><br>
-                <label for="lastdonate">Last Date:</label>
-                <input type="date" id="lastdonate" name="lastdonate" required><br><br>
-                
-                <label for="person_image">Profile Pic:</label>
-                <input type="file" id="person_image" name="person_image" required><br><br>
-                
-                <input type="submit" value="Submit">
+                <label for="lastdonate">Last Donated:</label><br>
+                <input type="date"  class="account_input" id="lastdonate" name="lastdonate"  required><br><br>
+                                            
+                <input class="account_input" type="submit" value="Submit" id="account_info_submit">
             </form>
+        </div>
+        <div class="account_info">
+
+                <button class="account_edit" onclick="account_form()">
+                    <img class="account_edit_icon" src="/static/edit_icon.png" alt="jkdfja">
+                    <p>Edit profile</p>
+                </button><br>
+            
+           <div class="profile_info">
+            <label for="name">Name</label><br>
+            <div class="account_input">
+                <p>{{person.name}}</p>
+            </div>
+            <br><br>
+            <label for="Age">Age</label><br>
+            <div class="account_input">
+                <p> {{person.age}} </p>
+
+            </div>
+            <br><br>
+            <label for="Blood Group">Blood Group</label><br>
+            <div class="account_input">
+                <p>{{person.blood_group}}</p>
+
+            </div>
+            <br><br>
+            <label for="Contact">Contact</label><br>
+            <div class="account_input">
+
+                <p >{{person.mobile_number}}</p>
+            </div>
+            <br><br>
+            <label for="Division">Division</label><br>
+            <div class="account_input">
+                
+                <p>{{person.division}}</p>
+            </div>
+            <br><br>
+            <label for="District">District</label><br>
+           <div class="account_input">
+               
+               <p>{{person.district}}</p>
+           </div> 
+           <br><br>
+           <label for="subdistrict">Subdistrict</label><br>
+           <div class="account_input">
+               <p>{{person.subdistrict}}</p>
+
+           </div>
+            <br><br>
+           <label for="lastdonate">Last Date:</label><br>
+           <div class="account_input">
+            <p>{{person.lastdate}}</p> 
+           </div>
+           <br><br>
+
+           </div>
         </div>
        </div>
        
