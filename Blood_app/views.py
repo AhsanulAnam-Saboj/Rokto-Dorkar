@@ -7,7 +7,7 @@ import sys
 from django.contrib.auth.models import User
 
 from django.contrib.auth import get_user_model
-sys.path.append(r'E:\All Projects\Web Project\Blood\Blood_app')
+sys.path.append(r'E:\All Projects\Web Project\Rokto Dorkar\Blood_app')
 from country import country_data
 
 User = get_user_model()
