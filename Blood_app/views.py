@@ -4,13 +4,23 @@ from .models import *
 from django.http import HttpResponse,JsonResponse
 import json
 import sys
+from django.contrib.auth.models import User
+
+from django.contrib.auth import get_user_model
 sys.path.append(r'E:\All Projects\Web Project\Blood\Blood_app')
 from country import country_data
-# Create your views here.
-# print('Saboj')
-# print(country_data)
-def home_page(request):
 
+User = get_user_model()
+def login_page(request):
+
+    return render(request,'login_page.html')
+
+def registration_page(request):
+
+    return render(request,'registration_page.html')
+
+def account_page(request):
+    person,created = Person.objects.get_or_create(user=request.user)
     if request.method =="POST":
         
         data = request.POST
@@ -24,26 +34,25 @@ def home_page(request):
         subdistrict =  data.get('subdistrict')
         lastdonate =  data.get('lastdonate')
         # print(person_image)
+        person.person_image = person_image
+        person.name = name
+        person.age = age
+        person.mobile_number = mobile_number
+        person.blood_group = blood_group
+        person.division = division
+        person.district = district
+        person.subdistrict = subdistrict
+        person.lastdonate = lastdonate
+        person.save()
 
-        Person.objects.create(
-            name = name,
-            age = age,
-            blood_group = blood_group,
-            mobile_number = mobile_number,
-            division  = division ,
-            district = district,
-            subdistrict = subdistrict,
-            lastdonate = lastdonate,
-            person_image = person_image,
-        )
-        return redirect('home_page')
+        return redirect('account_page')
     
   
     context =  {
          'country': country_data,
       }
     
-    return render(request , 'home_page.html',context)
+    return render(request , 'account_page.html',context)
 
 
 def main_page(request):
@@ -75,4 +84,5 @@ def main_page(request):
     context = {'person': queryset, 'country': country_data}
     return render(request, 'main_page.html', context)
        
+
 

@@ -21,15 +21,17 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 # Import views from the Blood_app
-from Blood_app.views import home_page, main_page
+from Blood_app.views import account_page, main_page,login_page,registration_page
 
 urlpatterns = [
     # Admin URL
     path('admin/', admin.site.urls),
     
     # Application URLs
-    path('home_page/', home_page, name='home_page'),
+    path('account_page/', account_page, name='account_page'),
     path('main_page/', main_page, name='main_page'),
+    path('login_page/',login_page,name="login_page"),
+    path('registration_page/',registration_page,name="registration_page")
 ]
 
 # Serving media files during development
