@@ -1,25 +1,74 @@
 from django.shortcuts import render,redirect
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
-from django.http import HttpResponse,JsonResponse
+from django.contrib import messages
 import json
 import sys
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import get_user_model
 sys.path.append(r'E:\All Projects\Web Project\Rokto Dorkar\Blood_app')
 from country import country_data
 
 User = get_user_model()
+
 def login_page(request):
+
+    if request.method == "POST":
+        phone_number = request.POST.get('phone_number')
+        password = request.POST.get('password')
+        if not User.objects.filter(phone_number=phone_number).exists():
+            return redirect('login_page')
+        
+        user = authenticate(phone_number = phone_number,password = password)
+        print('Kortamni')
+        if user is None:
+            messages.info(request,'Invalid Password')
+            return redirect('login_page')
+        else:
+            login(request,user)
+            return redirect('main_page')
+
 
     return render(request,'login_page.html')
 
-def registration_page(request):
+def logout_page(request):
 
+    logout(request)
+    return redirect('login_page')
+    
+
+
+def registration_page(request):
+    if request.method == "POST":
+        phone_number = request.POST.get('phone_number')
+        password = request.POST.get('password')
+        
+        # print('saboj vai')
+        user = User.objects.filter(phone_number = phone_number)
+
+        # print('saboj vai')
+        if user.exists():
+            messages.info(request,'Phone number already exists')
+            return redirect('registration_page')
+
+        user = User.objects.create(
+ 
+            phone_number = phone_number
+        )
+        user.set_password(password)
+        user.save()
+        print('saved user')
+        messages.info(request,'User created successfully')
+        return redirect('registration_page')
+        
     return render(request,'registration_page.html')
 
+@login_required(login_url="/login_page")
 def account_page(request):
+    print(request.user)
     person,created = Person.objects.get_or_create(user=request.user)
     if request.method =="POST":
         
@@ -50,11 +99,12 @@ def account_page(request):
   
     context =  {
          'country': country_data,
+         'person': person,
       }
     
     return render(request , 'account_page.html',context)
 
-
+@login_required(login_url="/login_page")
 def main_page(request):
     
     queryset = Person.objects.all()

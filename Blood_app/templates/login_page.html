@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log In</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+  </head>
+  <body>
     
-    
+    <div class="auth_section">
+      <form method="POST">
+        {% csrf_token %}
+        <div class="auth_container">
+          <div class="login_icon_div">
+            <img id="login_icon" src="/static/login_icon.png" alt="" />
+            <h1>Login</h1>
+          </div>
+          <br><br><br><br><br><br>
+          <input type="text" placeholder="Enter mobile number" name="phone_number" class="auth_input" required /><br />
 
+          <input type="password" placeholder="Enter password" name="password" class="auth_input" required /><br /><br />
 
-</body>
+          <button type="submit" class="auth_button">Log In</button>
+          <br>
+          <p>
+            Don't have an account? <a href="/registration_page">Sign Up</a>.
+          </p>
+        </div>
+      </form>
+    </div>
+    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+  </body>
 </html>

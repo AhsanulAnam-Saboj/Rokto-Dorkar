@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Person
+from .models import Person,User
 
 
 class PersonAdmin(admin.ModelAdmin):
@@ -9,3 +9,4 @@ class PersonAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Person, PersonAdmin)
+admin.site.register(User)

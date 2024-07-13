@@ -27,7 +27,7 @@
       <!-- Page content -->
        <div class="content">
         
-           <img class = "profile_pic" src="/static/mine.jpg" alt="Profile pic">
+           <img class = "profile_pic" src="/media/{{person.person_image}}" alt="Profile pic">
            <br><br>
         <div class="account_form">    
             
@@ -46,16 +46,18 @@
                 <input type="file" class="person_image" name="person_image"  required><br><br>
                
                 <label for="name">Name</label><br>
-                <input type="text" class="account_input" id="name" name="name" placeholder = "ex: David Miller" required><br><br>
+                <input type="text" class="account_input" id="name" name="name" placeholder = "ex: David Miller" value="{{person.name}}" required><br><br>
             
                 <label for="age">Age</label><br>
-                <input type="number"  class="account_input"id="age" name="age" placeholder = "ex: 24" required><br><br>
+                <input type="number"  class="account_input"id="age" name="age" placeholder = "ex: 24" value="{{person.age}}" required><br><br>
             
                
                 <label for="blood_group Group">Blood Group</label><br>
-                        <select name="blood_group" class="account_input" id="blood_group">
-                            
-                          <option value="" disabled selected>ex: A+</option>
+                        <select name="blood_group" class="account_input" id="blood_group" value="{{person.blood_group}}">
+                        
+                            {% if person.blood_group == "" %}
+                            <option value="" disabled selected>ex: A+</option>
+                        {% endif %}
                           <option value="A+">A+</option>
                           <option value="A-">A-</option>
                           <option value="B+">B+</option>
@@ -68,25 +70,25 @@
 
                 <br><br>
                 <label for="mobile_number">Contact</label><br>
-                <input type="text"  class="account_input" id="mobile_number" name="mobile_number" placeholder="ex: 01712008015" required><br><br>
+                <input type="text"  class="account_input" id="mobile_number" name="mobile_number" placeholder="ex: 01712008015" value="{{person.mobile_number}}" required><br><br>
                 
                 <label for="division">Division:</label><br>
-                <select  class="account_input" name="division" id="account_division" >
+                <select  class="account_input" name="division" id="account_division" value="{{person.division}}" required >
                   <option value="" disabled selected>Select Division</option>
                 </select>
                 <br><br>
                 <label for="district">District:</label><br>
-                <select name="district" class="account_input" id="account_district" >
+                <select name="district" class="account_input" id="account_district" value="{{person.district}}" required>
                     <option value="" disabled selected>Select District</option>
                 </select>
                 <br><br>
                 <label for="subdistrict">Subdistrict:</label><br>
-                <select name="subdistrict" class="account_input" id="account_subdistrict">
+                <select name="subdistrict" class="account_input" id="account_subdistrict" value="{{person.subdistrict}}" required>
                     <option value="" disabled selected>Select Subdistrict</option>
                 </select>
                 <br><br>
                 <label for="lastdonate">Last Donated:</label><br>
-                <input type="date"  class="account_input" id="lastdonate" name="lastdonate"  required><br><br>
+                <input type="date"  class="account_input" id="lastdonate" name="lastdonate" value="{{person.lastdonate}}" required><br><br>
                                             
                 <input class="account_input" type="submit" value="Submit" id="account_info_submit">
             </form>
@@ -142,7 +144,7 @@
             <br><br>
            <label for="lastdonate">Last Date:</label><br>
            <div class="account_input">
-            <p>{{person.lastdate}}</p> 
+            <p>{{person.lastdonate}}</p> 
            </div>
            <br><br>
 
