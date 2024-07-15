@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function updateAccountDivision(){
-    console.log('Sabojjjj');
+   
     const divisionSelect = document.getElementById("account_division");
 
     divisionSelect.innerHTML = "";

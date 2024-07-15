@@ -10,16 +10,16 @@
 </head>
 <body>
     <!-- The sidebar -->
-   
-<div class="maindiv">
     <div class="appbar">
-        <img id="appbar_icon" src="/static/icon.png" alt="">
+        <img id="appbar_icon" src="/static/icon.png" alt="Rokto Dorkar">
         <h1>Rokto Dorkar</h1>
-    </div>
+    </div> 
+<div class="maindiv">
+   
     <div class="sidebar">
+        
         <a href="/main_page">Home</a>
         <a href="/account_page">Account</a>
-        <a href="#contact">Contact</a>
         <a href="#about">About</a>
         <a href="/logout_page/" >Log Out</a>
     </div>
@@ -32,12 +32,18 @@
             <img class="search_icon" src="/static/searchicon.png" alt="">  
         </button>
         <div class="popup" id="popup">
-            <!-- Popup content -->
+            <a class="cancel_search" href="" >
+            <div class="cancel_search">
+                    <img class="cancel_search" src="/static/cancel_icon.png" alt="">
+                    
+                </div>
+            </a>
+
             <div class="popup-content">
                     <form method="post">
                         {% csrf_token %}
-                        <label for="Blood Group">Select Your Blood Group:</label>
-                        <select class="ok_button" name="blood_group" id="blood_group">
+                        <label for="Blood Group">Blood Group:</label>
+                        <select class="search_input" name="blood_group" id="blood_group">
                           <option value="A+">A+</option>
                           <option value="A-">A-</option>
                           <option value="B+">B+</option>
@@ -49,18 +55,18 @@
                         </select>
                         <br><br>
     
-                        <label for="Division">Select Your Division:</label>
-                        <select class="ok_button" name="division" id="division">
+                        <label for="Division">Division:</label>
+                        <select class="search_input" name="division" id="division">
                             
                         </select>
                         <br><br>
-                        <label for="District">Select Your District:</label>
-                        <select class="ok_button" name="district" id="district">
+                        <label for="District">District:</label>
+                        <select class="search_input" name="district" id="district">
                         
                         </select>
                         <br><br>
-                        <label for="SubDistrict">Select Your Sub District:</label>
-                        <select class="ok_button" name="subdistrict" id="subdistrict">
+                        <label for="SubDistrict">Sub District:</label>
+                        <select class="search_input" name="subdistrict" id="subdistrict">
                             
                         </select>
                         <br><br>
@@ -68,6 +74,7 @@
                     <div class="search_container">
                         <button class="search_button" onclick="togglePopup()">Search</button>
                     </div>
+                    
                     </form>
                     
             </div>
@@ -88,7 +95,7 @@
         </div>
         <div class="image_div">
 
-            <img class="personimg"src="/media/{{person.person_image}}" alt="Saboj iMage">
+            <img class="personimg"src="/media/{{person.person_image}}" alt="{{person.name}}'s image">
                 
         </div>
       

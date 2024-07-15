@@ -7,7 +7,6 @@ import sys
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
-
 from django.contrib.auth import get_user_model
 sys.path.append(r'E:\All Projects\Web Project\Rokto Dorkar\Blood_app')
 from country import country_data
@@ -23,7 +22,7 @@ def login_page(request):
             return redirect('login_page')
         
         user = authenticate(phone_number = phone_number,password = password)
-        print('Kortamni')
+        # print('Kortamni')
         if user is None:
             messages.info(request,'Invalid Password')
             return redirect('login_page')
@@ -45,34 +44,28 @@ def registration_page(request):
     if request.method == "POST":
         phone_number = request.POST.get('phone_number')
         password = request.POST.get('password')
-        
-        # print('saboj vai')
         user = User.objects.filter(phone_number = phone_number)
-
-        # print('saboj vai')
         if user.exists():
             messages.info(request,'Phone number already exists')
             return redirect('registration_page')
-
         user = User.objects.create(
- 
             phone_number = phone_number
         )
         user.set_password(password)
         user.save()
-        print('saved user')
         messages.info(request,'User created successfully')
-        return redirect('registration_page')
+        return redirect('login_page')
         
     return render(request,'registration_page.html')
 
 @login_required(login_url="/login_page")
 def account_page(request):
-    print(request.user)
+    
     person,created = Person.objects.get_or_create(user=request.user)
     if request.method =="POST":
         
         data = request.POST
+
         person_image = request.FILES.get('person_image')
         name = data.get('name')
         age =  data.get('age')
@@ -82,8 +75,8 @@ def account_page(request):
         district =  data.get('district')
         subdistrict =  data.get('subdistrict')
         lastdonate =  data.get('lastdonate')
-        # print(person_image)
-        person.person_image = person_image
+        if person_image:
+          person.person_image = person_image
         person.name = name
         person.age = age
         person.mobile_number = mobile_number
@@ -116,21 +109,16 @@ def main_page(request):
         district = data.get('district')
         subdistrict = data.get('subdistrict')
         
-        # print(blood_group)
-        # print(division)
-        # print(district)
-        
         if blood_group:
             queryset = queryset.filter(blood_group__icontains=blood_group)
-        if division:
+        if  division !="ALL" :
             queryset = queryset.filter(division__icontains=division)
-        if district:
+        if  district !="ALL":
             queryset = queryset.filter(district__icontains=district)
-        if subdistrict:
+        if subdistrict != 'ALL':
             queryset = queryset.filter(subdistrict__icontains=subdistrict)
         
 
-    print(queryset)
     context = {'person': queryset, 'country': country_data}
     return render(request, 'main_page.html', context)
        

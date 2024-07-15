@@ -1,160 +1,139 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% load static %}
-    <link rel="stylesheet" href="{% static 'style.css'%}">
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
     <title>Account</title>
-</head>
-<body>
+  </head>
+  <body>
     <!-- The sidebar -->
-    
-<div class="maindiv">
     <div class="appbar">
-        <img id="appbar_icon" src="/static/icon.png" alt="">
-        <h1>Rokto Dorkar</h1>
-    </div>
-    <div class="sidebar">
+      <img id="appbar_icon" src="/static/icon.png" alt="Rokto Dorkar">
+      <h1>Rokto Dorkar</h1>
+     </div> 
+    <div class="maindiv">
+      <div class="sidebar">
+        
         <a class="active" href="/main_page">Home</a>
         <a href="/account_page">Account</a>
-        <a href="#contact">Contact</a>
         <a href="#about">About</a>
-    </div>
-      
+      </div>
+
       <!-- Page content -->
-       <div class="content">
-        
-           <img class = "profile_pic" src="/media/{{person.person_image}}" alt="Profile pic">
-           <br><br>
-        <div class="account_form">    
-            
+      <div class="content">
+        <img class="profile_pic" src="/media/{{ person.person_image }}" alt="Profile pic" />
+        <br /><br />
+        <div class="account_form">
+          <button class="account_edit" onclick="account_form()">
+            <img class="account_edit_icon" src="/static/edit_cancel_icon.png" alt="Blood Icon" />
+            <p>Cancel Edit</p>
+          </button><br />
 
-            <button class="account_edit" onclick="account_form()">
-                <img class="account_edit_icon" src="/static/edit_cancel_icon.png" alt="jkdfja">
-                <p>Cancel Edit</p>
-            </button><br>
+          <form method="post" class="sfore" enctype="multipart/form-data" onsubmit="account_form()">
+            {% csrf_token %}
+            <label for="person_image" class="person_image">Choose profile pic</label><br />
+            <input type="file" class="person_image" name="person_image" value="{{person.person_image|default_if_none:""}}"  /><br /><br />
 
+            <label for="name">Name</label><br />
+            <input type="text" class="account_input" id="name" name="name" placeholder="ex: David Miller" value="{{ person.name|default_if_none:'' }}" required /><br /><br />
 
+            <label for="age">Age</label><br />
+            <input type="number" class="account_input" id="age" name="age" placeholder="ex: 24" value="{{ person.age|default_if_none:'' }}" required /><br /><br />
 
+            <label for="blood_group Group">Blood Group</label><br />
+            <select name="blood_group" class="account_input" id="blood_group" value="{{ person.blood_group|default_if_none:'' }}">
+              {% if not person.blood_group %}
+                <option value="" disabled selected>ex: A+</option>
+              {% endif %}
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+            </select>
 
-            <form method="post" class="sfore" enctype="multipart/form-data" onsubmit="account_form()" >
-                {% csrf_token %}
-                <label for="person_image" class="person_image">Choose profile pic</label><br>
-                <input type="file" class="person_image" name="person_image"  required><br><br>
-               
-                <label for="name">Name</label><br>
-                <input type="text" class="account_input" id="name" name="name" placeholder = "ex: David Miller" value="{{person.name}}" required><br><br>
-            
-                <label for="age">Age</label><br>
-                <input type="number"  class="account_input"id="age" name="age" placeholder = "ex: 24" value="{{person.age}}" required><br><br>
-            
-               
-                <label for="blood_group Group">Blood Group</label><br>
-                        <select name="blood_group" class="account_input" id="blood_group" value="{{person.blood_group}}">
-                        
-                            {% if person.blood_group == "" %}
-                            <option value="" disabled selected>ex: A+</option>
-                        {% endif %}
-                          <option value="A+">A+</option>
-                          <option value="A-">A-</option>
-                          <option value="B+">B+</option>
-                          <option value="B-">B-</option>
-                          <option value="O+">O+</option>
-                          <option value="O-">O-</option>
-                          <option value="AB+">AB+</option>
-                          <option value="AB-">AB-</option>
-                        </select>
+            <br /><br />
+            <label for="mobile_number">Contact</label><br />
+            <input type="text" class="account_input" id="mobile_number" name="mobile_number" placeholder="ex: 01712008015" value="{{ person.mobile_number|default_if_none:'' }}" required /><br /><br />
 
-                <br><br>
-                <label for="mobile_number">Contact</label><br>
-                <input type="text"  class="account_input" id="mobile_number" name="mobile_number" placeholder="ex: 01712008015" value="{{person.mobile_number}}" required><br><br>
-                
-                <label for="division">Division:</label><br>
-                <select  class="account_input" name="division" id="account_division" value="{{person.division}}" required >
-                  <option value="" disabled selected>Select Division</option>
-                </select>
-                <br><br>
-                <label for="district">District:</label><br>
-                <select name="district" class="account_input" id="account_district" value="{{person.district}}" required>
-                    <option value="" disabled selected>Select District</option>
-                </select>
-                <br><br>
-                <label for="subdistrict">Subdistrict:</label><br>
-                <select name="subdistrict" class="account_input" id="account_subdistrict" value="{{person.subdistrict}}" required>
-                    <option value="" disabled selected>Select Subdistrict</option>
-                </select>
-                <br><br>
-                <label for="lastdonate">Last Donated:</label><br>
-                <input type="date"  class="account_input" id="lastdonate" name="lastdonate" value="{{person.lastdonate}}" required><br><br>
-                                            
-                <input class="account_input" type="submit" value="Submit" id="account_info_submit">
-            </form>
+            <label for="division">Present division:</label><br />
+            <select class="account_input" name="division" id="account_division" value="{{ person.division|default_if_none:'Select divison' }}" required>
+              <option value="" disabled selected>Select Division</option>
+            </select>
+            <br /><br />
+            <label for="district">Present district:</label><br />
+            <select name="district" class="account_input" id="account_district" value="{{ person.district|default_if_none:'Select district' }}" required>
+              <option value="" disabled selected>Select District</option>
+            </select>
+            <br /><br />
+            <label for="subdistrict">Present subdistrict:</label><br />
+            <select name="subdistrict" class="account_input" id="account_subdistrict" value="{{ person.division }}" required>
+              <option value="" disabled selected>Select Subdistrict</option>
+            </select>
+            <br /><br />
+            <label for="lastdonate">Last Donated:</label><br />
+            <input type="date" class="account_input" id="lastdonate" name="lastdonate" value="{{ person.lastdonate|default_if_none:'' }}" required /><br /><br />
+
+            <input class="account_input" type="submit" value="Submit" id="account_info_submit" />
+          </form>
         </div>
         <div class="account_info">
+          <button class="account_edit" onclick="account_form()">
+            <img class="account_edit_icon" src="/static/edit_icon.png" alt="jkdfja" />
+            <p>Edit profile</p>
+          </button><br />
 
-                <button class="account_edit" onclick="account_form()">
-                    <img class="account_edit_icon" src="/static/edit_icon.png" alt="jkdfja">
-                    <p>Edit profile</p>
-                </button><br>
-            
-           <div class="profile_info">
-            <label for="name">Name</label><br>
+          <div class="profile_info">
+            <label for="name">Name</label><br />
             <div class="account_input">
-                <p>{{person.name}}</p>
+              <p>{{ person.name }}</p>
             </div>
-            <br><br>
-            <label for="Age">Age</label><br>
+            <br /><br />
+            <label for="Age">Age</label><br />
             <div class="account_input">
-                <p> {{person.age}} </p>
-
+              <p>{{ person.age }}</p>
             </div>
-            <br><br>
-            <label for="Blood Group">Blood Group</label><br>
+            <br /><br />
+            <label for="Blood Group">Blood Group</label><br />
             <div class="account_input">
-                <p>{{person.blood_group}}</p>
-
+              <p>{{ person.blood_group }}</p>
             </div>
-            <br><br>
-            <label for="Contact">Contact</label><br>
+            <br /><br />
+            <label for="Contact">Contact</label><br />
             <div class="account_input">
-
-                <p >{{person.mobile_number}}</p>
+              <p>{{ person.mobile_number }}</p>
             </div>
-            <br><br>
-            <label for="Division">Division</label><br>
+            <br /><br />
+            <label for="Division">Division</label><br />
             <div class="account_input">
-                
-                <p>{{person.division}}</p>
+              <p>{{ person.division }}</p>
             </div>
-            <br><br>
-            <label for="District">District</label><br>
-           <div class="account_input">
-               
-               <p>{{person.district}}</p>
-           </div> 
-           <br><br>
-           <label for="subdistrict">Subdistrict</label><br>
-           <div class="account_input">
-               <p>{{person.subdistrict}}</p>
-
-           </div>
-            <br><br>
-           <label for="lastdonate">Last Date:</label><br>
-           <div class="account_input">
-            <p>{{person.lastdonate}}</p> 
-           </div>
-           <br><br>
-
-           </div>
+            <br /><br />
+            <label for="District">District</label><br />
+            <div class="account_input">
+              <p>{{ person.district }}</p>
+            </div>
+            <br /><br />
+            <label for="subdistrict">Subdistrict</label><br />
+            <div class="account_input">
+              <p>{{ person.subdistrict }}</p>
+            </div>
+            <br /><br />
+            <label for="lastdonate">Last Date:</label><br />
+            <div class="account_input">
+              <p>{{ person.lastdonate }}</p>
+            </div>
+            <br /><br />
+          </div>
         </div>
-       </div>
-       
-</div>
+      </div>
+    </div>
 
-{{ country|json_script:"country" }};
-<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
-</body>
+    {{ country|json_script:'country' }};<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+  </body>
 </html>
