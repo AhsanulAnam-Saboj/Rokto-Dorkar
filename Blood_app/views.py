@@ -102,7 +102,7 @@ def account_page(request):
 @login_required(login_url="/login_page")
 def main_page(request):
     
-    queryset = queryset = Person.objects.all().order_by('-id')[:200]
+    queryset = queryset = Person.objects.all().order_by('?')[:200]
     
     if request.method == "POST":
         data = request.POST
@@ -123,7 +123,7 @@ def main_page(request):
             filters['subdistrict'] = subdistrict
         
         filters['lastdonate__lte'] = timezone.now().date() - timedelta(days=4*30)
-        queryset = Person.objects.filter(**filters)[:200]
+        queryset = Person.objects.filter(**filters).order_by('?')[:200]
 
     context = {'person': queryset, 'country': country_data}
     return render(request, 'main_page.html', context)
