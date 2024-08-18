@@ -8,6 +8,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
+from django.utils import timezone
+from datetime import timedelta
 sys.path.append(r'E:\All Projects\Web Project\Rokto Dorkar\Blood_app')
 from country import country_data
 
@@ -100,7 +102,7 @@ def account_page(request):
 @login_required(login_url="/login_page")
 def main_page(request):
     
-    queryset = Person.objects.all()
+    queryset = queryset = Person.objects.all().order_by('-id')[:200]
     
     if request.method == "POST":
         data = request.POST
@@ -109,18 +111,20 @@ def main_page(request):
         district = data.get('district')
         subdistrict = data.get('subdistrict')
         
-        if blood_group:
-            queryset = queryset.filter(blood_group__icontains=blood_group)
-        if  division !="ALL" :
-            queryset = queryset.filter(division__icontains=division)
-        if  district !="ALL":
-            queryset = queryset.filter(district__icontains=district)
-        if subdistrict != 'ALL':
-            queryset = queryset.filter(subdistrict__icontains=subdistrict)
+        filters = {}
         
+        if blood_group:
+            filters['blood_group'] = blood_group
+        if division != "ALL":
+            filters['division'] = division
+        if district != "ALL":
+             filters['district'] = district
+        if subdistrict != "ALL":
+            filters['subdistrict'] = subdistrict
+        
+        filters['lastdonate__lte'] = timezone.now().date() - timedelta(days=4*30)
+        queryset = Person.objects.filter(**filters)[:200]
 
     context = {'person': queryset, 'country': country_data}
     return render(request, 'main_page.html', context)
        
-
-

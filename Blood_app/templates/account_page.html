@@ -10,12 +10,11 @@
   <body>
     <!-- The sidebar -->
     <div class="appbar">
-      <img id="appbar_icon" src="/static/icon.png" alt="Rokto Dorkar">
+      <button id="appbar_icon_button" onclick="home_page()"><img id="appbar_icon" src="/static/icon.png" alt="Rokto Dorkar" /></button>
       <h1>Rokto Dorkar</h1>
-     </div> 
+    </div>
     <div class="maindiv">
       <div class="sidebar">
-        
         <a class="active" href="/main_page">Home</a>
         <a href="/account_page">Account</a>
         <a href="#about">About</a>
@@ -23,7 +22,10 @@
 
       <!-- Page content -->
       <div class="content">
-        <img class="profile_pic" src="/media/{{ person.person_image }}" alt="Profile pic" />
+       
+        <div class="profile_pic_div">
+          <img class="profile_pic" src="/media/{{ person.person_image }}" alt="Profile pic" />
+        </div>
         <br /><br />
         <div class="account_form">
           <button class="account_edit" onclick="account_form()">
@@ -34,7 +36,7 @@
           <form method="post" class="sfore" enctype="multipart/form-data" onsubmit="account_form()">
             {% csrf_token %}
             <label for="person_image" class="person_image">Choose profile pic</label><br />
-            <input type="file" class="person_image" name="person_image" value="{{person.person_image|default_if_none:""}}"  /><br /><br />
+            <input type="file" class="person_image" name="person_image" value="{{ person.person_image|default_if_none:'' }}" /><br /><br />
 
             <label for="name">Name</label><br />
             <input type="text" class="account_input" id="name" name="name" placeholder="ex: David Miller" value="{{ person.name|default_if_none:'' }}" required /><br /><br />
