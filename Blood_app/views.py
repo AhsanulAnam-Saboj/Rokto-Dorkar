@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 from datetime import timedelta
+import random
 sys.path.append(r'E:\All Projects\Web Project\Rokto Dorkar\Blood_app')
 from country import country_data
 
@@ -102,7 +103,7 @@ def account_page(request):
 @login_required(login_url="/login_page")
 def main_page(request):
     
-    queryset = queryset = Person.objects.all().order_by('?')[:200]
+    queryset = Person.objects.all().order_by('-id')[:200]
     
     if request.method == "POST":
         data = request.POST
@@ -123,7 +124,12 @@ def main_page(request):
             filters['subdistrict'] = subdistrict
         
         filters['lastdonate__lte'] = timezone.now().date() - timedelta(days=4*30)
-        queryset = Person.objects.filter(**filters).order_by('?')[:200]
+        filtered_ids = Person.objects.filter(**filters).values_list('id',flat=True)
+        
+        random.shuffle(filtered_ids)
+        
+        filtered_ids = filtered_ids[:200]
+        queryset = Person.objects.filter(id__in = filtered_ids)
 
     context = {'person': queryset, 'country': country_data}
     return render(request, 'main_page.html', context)
