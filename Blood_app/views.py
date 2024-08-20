@@ -22,6 +22,7 @@ def login_page(request):
         phone_number = request.POST.get('phone_number')
         password = request.POST.get('password')
         if not User.objects.filter(phone_number=phone_number).exists():
+            messages.info(request,'User not exist')
             return redirect('login_page')
         
         user = authenticate(phone_number = phone_number,password = password)
@@ -102,7 +103,6 @@ def account_page(request):
 
 @login_required(login_url="/login_page")
 def main_page(request):
-    
     queryset = Person.objects.all().order_by('-id')[:200]
     
     if request.method == "POST":

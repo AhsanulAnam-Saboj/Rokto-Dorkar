@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{% static 'style.css' %}" />
   </head>
   <body>
-
     <div class="auth_section">
       <form method="POST">
         {% csrf_token %}
@@ -17,13 +16,18 @@
             <img id="login_icon" src="/static/login_icon.png" alt="" />
             <h1>Login</h1>
           </div>
-          <br><br><br><br><br><br>
+          <br /><br /><br /><br /><br /><br />
           <input type="text" placeholder="Enter mobile number" name="phone_number" class="auth_input" required /><br />
 
           <input type="password" placeholder="Enter password" name="password" class="auth_input" required />
-          <br><br>
+          <br /><br />
           <button type="submit" class="auth_button">Log In</button>
-          <br>
+          <br />
+          {% if messages %}
+          {% for message in messages %}
+            {{ message }}
+          {% endfor %}
+        {% endif %}
           <p>
             Don't have an account? <a href="/registration_page">Sign Up</a>.
           </p>
