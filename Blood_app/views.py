@@ -67,9 +67,7 @@ def account_page(request):
     
     person,created = Person.objects.get_or_create(user=request.user)
     if request.method =="POST":
-        
         data = request.POST
-
         person_image = request.FILES.get('person_image')
         name = data.get('name')
         age =  data.get('age')
@@ -105,6 +103,7 @@ def account_page(request):
 def main_page(request):
     queryset = Person.objects.all().order_by('-id')[:200]
     
+    print(queryset)
     if request.method == "POST":
         data = request.POST
         blood_group = data.get('blood_group')
@@ -114,22 +113,23 @@ def main_page(request):
         
         filters = {}
         
+        # Apply filters based on provided input
         if blood_group:
             filters['blood_group'] = blood_group
         if division != "ALL":
             filters['division'] = division
         if district != "ALL":
-             filters['district'] = district
+            filters['district'] = district
         if subdistrict != "ALL":
             filters['subdistrict'] = subdistrict
-        
+        print(blood_group)
+        # Filter people who donated at least 4 months ago
         filters['lastdonate__lte'] = timezone.now().date() - timedelta(days=4*30)
-        filtered_ids = Person.objects.filter(**filters).values_list('id',flat=True)
+        filtered_ids = Person.objects.filter(**filters).values_list('id', flat=True)
         
-        random.shuffle(filtered_ids)
-        
-        filtered_ids = filtered_ids[:200]
-        queryset = Person.objects.filter(id__in = filtered_ids)
+        # Shuffle and limit to 200 people
+        filtered_ids = random.sample(list(filtered_ids), min(200, len(filtered_ids)))
+        queryset = Person.objects.filter(id__in=filtered_ids)
 
     context = {'person': queryset, 'country': country_data}
     return render(request, 'main_page.html', context)
