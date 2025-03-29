@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
 from django.contrib import messages
+from math import radians, sin, cos, sqrt, atan2
 import json
 import sys
 from django.contrib.auth.models import User
@@ -9,9 +10,11 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.utils import timezone
+from dateutil.relativedelta import relativedelta
 from datetime import timedelta
 import random
-sys.path.append(r'E:\All Projects\Web Project\Rokto Dorkar\Blood_app')
+import requests
+sys.path.append(r'D:\Django\Rokto Dorkar\Blood_app')
 from country import country_data
 
 User = get_user_model()
@@ -61,6 +64,56 @@ def registration_page(request):
         return redirect('login_page')
         
     return render(request,'registration_page.html')
+def get_lat_lon(address):
+    url = f"https://nominatim.openstreetmap.org/search?q={address}&format=json"
+    headers = {"User-Agent": "MyGeocodingApp/1.0 (ahsanulanamsaboj1999@gmail.com)"}
+    
+    try:
+        response = requests.get(url, headers=headers, timeout=10)  # Timeout added
+        print(address)
+        print(response)
+        print(f"Status Code: {response.status_code}")  # Debugging
+        # print(f"Response Text: {response.text}")  # Debugging
+        
+        if response.status_code == 200 and response.text.strip():
+            data = response.json()
+            # print(data)
+            if data:
+                return data[0]["lat"], data[0]["lon"]
+            else:
+                return None,None
+        else:
+            return None,None
+
+    except requests.exceptions.Timeout:
+        return None,None
+    except requests.exceptions.RequestException as e:
+        return None,None
+
+
+def haversine(lat1, lon1, lat2, lon2):
+
+    print(lat1,lat2,lon1,lon2)
+    if None in [lat1, lon1, lat2, lon2]:
+        return 100000000
+    # Radius of the Earth in km
+    R = 6371.0
+    
+    # Convert degrees to radians
+    lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
+    
+    # Differences in coordinates
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+    
+    # Haversine formula
+    a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+    
+    # Distance in kilometers
+    distance = R * c
+    return distance
+
 
 @login_required(login_url="/login_page")
 def account_page(request):
@@ -77,6 +130,9 @@ def account_page(request):
         district =  data.get('district')
         subdistrict =  data.get('subdistrict')
         lastdonate =  data.get('lastdonate')
+        address = f"{subdistrict}, {district}, {division}"
+        latitude , longitude = get_lat_lon(address)
+        # print({latitude} + {longitude} + "saboj")
         if person_image:
           person.person_image = person_image
         person.name = name
@@ -87,6 +143,8 @@ def account_page(request):
         person.district = district
         person.subdistrict = subdistrict
         person.lastdonate = lastdonate
+        person.longitude = longitude
+        person.latitude = latitude
         person.save()
 
         return redirect('account_page')
@@ -103,34 +161,43 @@ def account_page(request):
 def main_page(request):
     queryset = Person.objects.all().order_by('-id')[:200]
     
-    print(queryset)
+    # print(queryset)
     if request.method == "POST":
         data = request.POST
         blood_group = data.get('blood_group')
         division = data.get('division')
         district = data.get('district')
         subdistrict = data.get('subdistrict')
+        address = f"{subdistrict},{district},{division}"
         
+        latitude , longitude = get_lat_lon(address)
+        print(str(latitude) + str(longitude) + "saboj")
+
+
         filters = {}
         
         # Apply filters based on provided input
         if blood_group:
             filters['blood_group'] = blood_group
-        if division != "ALL":
-            filters['division'] = division
-        if district != "ALL":
-            filters['district'] = district
-        if subdistrict != "ALL":
-            filters['subdistrict'] = subdistrict
+        
         print(blood_group)
+        print(latitude, longitude)
         # Filter people who donated at least 4 months ago
-        filters['lastdonate__lte'] = timezone.now().date() - timedelta(days=4*30)
+        filters['lastdonate__lte'] = timezone.now().date() - relativedelta(days=4*30)
         filtered_ids = Person.objects.filter(**filters).values_list('id', flat=True)
         
         # Shuffle and limit to 200 people
-        filtered_ids = random.sample(list(filtered_ids), min(200, len(filtered_ids)))
-        queryset = Person.objects.filter(id__in=filtered_ids)
-
+        filtered_persons = Person.objects.filter(id__in=filtered_ids)
+        # random.shuffle(filtered_persons)
+        queryset = []
+        for invidual in filtered_persons:
+            print(latitude, invidual.latitude)
+            if None in [latitude, longitude, invidual.latitude, invidual.longitude]:
+                continue
+            distance = haversine(float(latitude), float(longitude), float(invidual.latitude), float(invidual.longitude))
+            if distance <= 100:
+             queryset.append(invidual)
+        
     context = {'person': queryset, 'country': country_data}
     return render(request, 'main_page.html', context)
        

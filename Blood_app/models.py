@@ -18,3 +18,5 @@ class Person(models.Model):
     subdistrict = models.CharField(null=True,max_length=100)
     person_image = models.ImageField(null= True,upload_to='images/')
     lastdonate = models.DateField(null=True)
+    longitude = models.FloatField(null=True, blank=True)
+    latitude = models.FloatField(null=True, blank=True)

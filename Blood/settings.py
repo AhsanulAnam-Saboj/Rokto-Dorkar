@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-dcayu&u2ki=#ece4x*%pzp%3#&d8i95uut2@l^jss)ep7$d=+8
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '192.168.1.118'
+   # '192.168.1.118'
 ]
 
 AUTH_USER_MODEL = 'Accounts.CustomUser'
