@@ -23,5 +23,5 @@ def get_lat_lon(address):
     except requests.exceptions.RequestException as e:
         return f"Error: {e}"
 
-address = "Cumilla Sadar Dokkhin,Cumilla,Chattogram"
+address = "Cumilla Shadar Dakkhin,Cumilla,Chattogram"
 print(get_lat_lon(address))
