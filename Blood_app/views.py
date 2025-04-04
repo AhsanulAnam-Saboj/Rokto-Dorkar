@@ -201,3 +201,7 @@ def main_page(request):
     context = {'person': queryset, 'country': country_data}
     return render(request, 'main_page.html', context)
        
+
+def about_page(request):
+    
+    return render(request,'about_page.html')

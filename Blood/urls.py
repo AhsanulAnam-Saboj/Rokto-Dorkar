@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 # Import views from the Blood_app
-from Blood_app.views import account_page, main_page,login_page,registration_page,logout_page
+from Blood_app.views import account_page, main_page,login_page,registration_page,logout_page,about_page
 
 urlpatterns = [
     # Admin URL
@@ -33,6 +33,8 @@ urlpatterns = [
     path('login_page/',login_page,name="login_page"),
     path('logout_page/',logout_page,name="logout_page"),
     path('registration_page/',registration_page,name="registration_page"),
+    path('about_page/',about_page,name='about_page')
+    
 ]
 
 # Serving media files during development

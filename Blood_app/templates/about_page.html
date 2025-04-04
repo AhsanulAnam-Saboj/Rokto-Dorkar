@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+    <title>About - Rokto Dorkar</title>
+  </head>
+  <body>
+    <!-- The sidebar -->
+    <div class="appbar">
+      <button id="appbar_icon_button" onclick="home_page()">
+        <img id="appbar_icon" src="/static/icon.png" alt="Rokto Dorkar">
+      </button>
+      <h1>Rokto Dorkar</h1>
+    </div>
+
+    <div class="maindiv">
+      <div class="sidebar">
+        <a href="/main_page">Home</a>
+        <a href="/account_page">Account</a>
+        <a class="active" href="#about">About</a>
+        <a href="/logout_page/">Log Out</a>
+      </div>
+
+      <!-- Page content -->
+      <div class="content">
+        <div class="about-container">
+          <div class="about-header">
+            <!-- <img src="/static/blood-donation-about.png" alt="Blood Donation" class="about-image"> -->
+            <h2>Our Mission</h2>
+            <p class="mission-statement">
+              Connecting blood donors with recipients in emergency situations to
+              save lives across Bangladesh.
+            </p>
+          </div>
+
+          <div class="about-section">
+            <h3>Why We Exist</h3>
+            <p>
+              Every day, hospitals and patients face critical shortages of
+              blood.
+              Rokto Dorkar was founded in 2024 to bridge this gap by creating
+              efficient blood donor network.
+            </p>
+          </div>
+
+          <div class="about-section">
+            <h3>How It Works</h3>
+            <div class="feature-cards">
+              <div class="feature-card">
+                <div class="feature-icon">1</div>
+                <h4>Search Donors</h4>
+                <p>Find compatible donors by blood type and location</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">2</div>
+                <h4>Quick Connection</h4>
+                <p>Directly contact available donors in your area</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">3</div>
+                <h4>Save Lives</h4>
+                <p>Facilitate timely blood donations when they're needed
+                  most</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="about-section stats-section">
+            <h3>Our Impact</h3>
+            <div class="stats-grid">
+              <div class="stat-item">
+                <div class="stat-number">1,200+</div>
+                <div class="stat-label">Lives Saved</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">5,000+</div>
+                <div class="stat-label">Registered Donors</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">64</div>
+                <div class="stat-label">Districts Covered</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Emergency Service</div>
+              </div>
+            </div>
+          </div> -->
+
+          <div class="about-section">
+            <h2>Development Team</h2>
+            <p>This platform was developed by:</p>
+            <div class="developer-credit">
+                <a href="https://ahsanulanam-saboj.vercel.app/" target="_blank" rel="noopener noreferrer">
+                    Ahsanul Anam Saboj
+                </a>
+            </div>
+        </div>
+        </div>
+      </div>
+
+      <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+    </body>
+  </html>

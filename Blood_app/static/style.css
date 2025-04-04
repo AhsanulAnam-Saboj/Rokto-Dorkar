@@ -1,399 +1,178 @@
+:root {
+  --primary: #D32F2F; /* Blood red */
+  --primary-dark: #B71C1C;
+  --primary-light: #FFCDD2;
+  --secondary: #2196F3; /* Blue for contrast */
+  --background: #FAFAFA;
+  --card-bg: #FFFFFF;
+  --text: #212121;
+  --text-light: #757575;
+  --success: #4CAF50;
+  --border: #E0E0E0;
+  --shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
 * {
-  margin: 0 auto;
-}
-
-.account_form {
-  display: none;
-  padding: 20px;
-  /* display: flex; */
-}
-
-h1 {
-
-  text-align: center;
-
-}
-
-/* The side navigation menu */
-.sidebar {
-  margin-top: 60px;
+  margin: 0;
   padding: 0;
-  width: 200px;
-  background-color: #f1f1f1;
-  position: fixed;
-  height: 100%;
-  overflow: auto;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Sidebar links */
-.sidebar a {
-  display: block;
-  color: black;
-  padding: 16px;
-  text-decoration: none;
+body {
+  background-color: var(--background);
+  color: var(--text);
 }
 
-/* Active/current link */
-.sidebar a.active {
-
-  /* background-color: rgb(187, 185, 185); */
-  /* color: white; */
-}
-
-/* Links on mouse-over */
-.sidebar a:hover:not(.active) {
-  background-color: white;
-  color: black;
-}
-
-/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
-
-
-
+/* App Bar Styles */
 .appbar {
-
   width: 100%;
-  line-height: 60px;
+  height: 60px;
+  background-color: var(--primary);
   color: white;
-  background: #f1f1f1;
   display: flex;
+  align-items: center;
   position: fixed;
-
-
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
+  padding: 0 16px;
 }
 
 .appbar h1 {
-
-  color: rgb(207, 70, 70);
-}
-
-div.content {
-
-  /* margin-top: 60px; */
-  padding-top: 65px;
-  margin-left: 200px;
-  height: 1000px;
-  /* background-color: aqua; */
-
+  color: white;
+  margin-left: 16px;
+  font-size: 1.5rem;
 }
 
 #appbar_icon {
-
-  margin: 5px;
-  width: 60px;
-  height: 50px;
-
+  width: 40px;
+  height: 40px;
 }
-#appbar_icon_button{
+
+#appbar_icon_button {
   border: none;
-  margin: 0px;
+  background: none;
   cursor: pointer;
-
+  padding: 8px;
 }
 
-.profile {
-
-  display: flex;
-  height: 250px;
-  overflow: hidden;
-  border-radius: .5em;
-  border: 2px solid rgb(247, 247, 247);
-
-  background-color: rgb(245, 240, 240);
-
-
-}
-
-.person_info {
-  padding: 20px;
-  margin-left: 0px;
-}
-
-.person_info h4,
-p {
-  margin: 10px 0;
-  /* Adjust the value as needed */
-}
-
-.image_div {
-  margin-right: 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
- 
-
-}
-
-.personimg {
-
-  max-width: 100%;
-  max-height: 100%;
-  align-items: center;
-  object-fit: cover;
-
-}
-
-.pbold {
-
-  font-weight: bold;
-}
-
-.tcolor {
-  color: red;
-}
-
-.even {
-  background-color: #f0f0f0;
-
-}
-
-.odd {
-  /* background-color: rgb(245, 235, 235); */
-  background-color: #e0e0e0;
-}
-
-.image_button {
-  width: 100%;
-  display: flex;
-  margin-right: 0px;
-}
-
-.search_bar {
-
-  color: #090909;
-  padding: 0.7em 1.7em;
-  margin-bottom: 1px;
-  font-size: 18px;
-  border-radius: 0.5em;
-  background: rgb(245, 243, 243);
-  cursor: pointer;
-  border: 1px solid grey;
+/* Sidebar Styles */
+.sidebar {
+  width: 200px;
+  background-color: var(--card-bg);
+  position: fixed;
+  top: 60px;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  border-right: 1px solid var(--border);
   transition: all 0.3s;
-  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
-  width: 100%;
-  display: flex;
-  color:rgb(207, 70, 70); ;
 }
 
-.search_bar:active {
-  color: #666;
-  box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+.sidebar a {
+  display: block;
+  padding: 16px;
+  color: var(--text);
+  text-decoration: none;
+  transition: all 0.3s;
+  border-left: 4px solid transparent;
+}
+
+.sidebar a:hover {
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  border-left: 4px solid var(--primary);
+}
+
+.sidebar a.active {
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  border-left: 4px solid var(--primary);
+}
+
+/* Content Area */
+.content {
+  margin-left: 200px;
+  padding: 80px 20px 20px;
+  min-height: calc(100vh - 60px);
+}
+
+/* Search Bar */
+.search_bar {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: all 0.3s;
+  color: var(--primary);
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.search_bar:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .search_icon {
-  align-items: center;
-  justify-content: center;
-  margin-right: 0px;
-  height: 30px;
-
+  height: 20px;
+  width: 20px;
 }
 
+/* Popup Styles
 .popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+} */
 
+
+.popup {
+  
   display: none;
   position: fixed;
   top: 50%;
   /* Center vertically */
   left: 50%;
   /* Center horizontally */
-  width: 400px;
-  height: 350px;
+  width: 30%;
+
+  z-index: 2;
   transform: translate(-50%, -50%);
   background-color: rgba(0, 0, 0, 0.8);
   /* Semi-transparent black background */
   color: white;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .popup-content {
-  /* text-align: center; */
+  /* background-color: var(--card-bg);
+  padding: 5px;
+  border-radius: 8px; */
   position: relative;
   height: 100%;
   width: 100%;
-
-
 }
-
-.search_button {
-
-  font-size: 20px;
-  padding: 0.6em 0.8em;
-  border-radius: 0.5em;
-  border: none;
-  background-color: #000;
-  color: #fff;
-  cursor: pointer;
-  box-shadow: 2px 2px 3px #000000b4;
-}
-.search_input{
-  font-size: 15px;
-  padding: 0.6em 0.8em;
-  border-radius: 0.5em;
-  background-color: #000;
-  color: #fff;
-  cursor: pointer;
-  box-shadow: 2px 2px 3px #000000b4;
-}
-
-.search_container {
-
-  position: absolute;
-  bottom: 0;
-  right: 50%;
-  transform: translateX(50%);
-  padding: 3px;
-  background: linear-gradient(90deg, #03a9f4, #f441a5);
-  border-radius: 0.9em;
-  transition: all 0.4s ease;
-
-}
-
-.search_container::before {
-
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
-.search_container:hover::before {}
-
-.search_container:active::before {}
-
-.person_image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.profile_pic {
-
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* .popup-content {
  
-}
-.profile_pic_div{
-  margin-top: 30px;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.account_input {
-  width: 100%;
-  height: 50px;
-  border: 1px solid rgb(209, 206, 206);
-  border-radius: 8px;
-  font-size: 20px;
-  padding-left: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-
-
-}
-
-.account_info {
-  padding: 20px;
-
-
-}
-
-.account_edit {
-  margin-left: 0;
-  display: flex;
-  align-items: center;
-  border-radius: 10px;
-}
-
-.account_edit:hover {
-  background: linear-gradient(90deg, #03a9f4, #f441a5);
-}
-
-
-.account_edit_icon {
-
-
-  height: 50px;
-  width: 50px;
-
-}
-
-#account_info_submit:hover {
-  background: linear-gradient(90deg, #03a9f4, #f441a5);
-
-}
-
-.auth_section {
-
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
-
-.auth_container {
-
-  width: 800px;
-  height: 500px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  border: 2px solid #e0e0e0;
-  border-radius: 25px;
-  /* background: #e0e0e0; */
-  box-shadow: 5px 5px 16px #5a5a5a,
-    -5px -5px 16px #ffffff;
   position: relative;
-
-}
-
-.auth_input {
-  width: 300px;
-  height: 50px;
-
-  border-radius: 5px;
-  border-width: .5px;
-  font-size: 15px;
-
-}
-
-#login_icon {
-  width: 80px;
-  height: 80px;
-
-}
-
-.login_icon_div {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  top: 20px;
-
-
-}
-
-.auth_button {
-
-  width: 100px;
-  height: 45px;
-  border-width: 1px;
-  border-radius: 5px;
-  font-size: 18px;
-}
-
-.auth_button:hover {
-  background: linear-gradient(90deg, #03a9f4, #f441a5);
-
-
-}
-
+  height: 100%;
+  width: 100%;
+} */
 .cancel_search{
 
   position: absolute;
@@ -402,103 +181,932 @@ p {
   height: 50px;
   width: 50px;
   border-radius: 10px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
   z-index: 1;
 
 }
+/* .cancel_search {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+} */
 
+.cancel_search img {
+  height: 24px;
+  width: 24px;
+}
 
+.search_input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0 16px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: var(--card-bg);
+  color: var(--text);
+}
 
-/* On screens that are less than 700px wide, make the sidebar into a topbar */
+.search_button {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  width: 100%;
+  margin-top: 16px;
+}
 
+.search_button:hover {
+  background-color: var(--primary-dark);
+}
 
+.search_container {
+  text-align: center;
+}
 
-@media screen and (max-width: 700px) {
+/* Profile Cards */
+.profile {
+  display: flex;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  margin: 16px 0;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s;
+}
+
+.profile:hover {
+  transform: translateY(-4px);
+}
+
+.profile.even {
+  border-left: 4px solid var(--primary);
+}
+
+.profile.odd {
+  border-left: 4px solid var(--secondary);
+}
+
+.person_info {
+  flex: 1;
+  padding: 20px;
+}
+
+.pbold {
+  font-weight: 600;
+}
+
+.tcolor {
+  color: var(--primary);
+}
+
+.image_div {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+.personimg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Account Page Styles */
+/* ======================= */
+/* ACCOUNT PAGE STYLES */
+/* ======================= */
+
+/* Profile Picture Section */
+.profile_pic_div {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 2rem;
+  border: 4px solid var(--primary-light);
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.profile_pic_div:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.profile_pic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.profile_pic:hover {
+  transform: scale(1.1);
+}
+
+/* Account Info/Form Containers */
+.account_info, 
+.account_form {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+}
+
+/* Edit Button Styles */
+.account_edit {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.account_edit:hover {
+  background-color: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+.account_edit_icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.account_edit:hover .account_edit_icon {
+  transform: rotate(-10deg);
+}
+
+/* Form Elements */
+.sfore {
+  display: flex;
+  flex-direction: column;
+}
+
+.sfore label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+
+.sfore label:hover {
+  color: var(--primary-dark);
+}
+
+.account_input, 
+select.account_input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: var(--card-bg);
+  transition: all 0.3s ease;
+}
+
+.account_input:focus, 
+select.account_input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-light);
+  outline: none;
+}
+
+/* File Input Styling */
+.person_image {
+  margin-bottom: 1.5rem;
+  padding: 0.5rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.person_image:hover {
+  border-color: var(--primary);
+  background-color: var(--primary-light);
+}
+
+/* Submit Button */
+#account_info_submit {
+  background-color: var(--primary);
+  color: white;
+  font-weight: 500;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+#account_info_submit:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* View Mode Styles */
+.profile_info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile_info label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.profile_info .account_input {
+  background-color: var(--background);
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.profile_info p {
+  margin: 0;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+/* Blood Group Highlight */
+.blood-group {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+  .profile_pic_div {
+    width: 120px;
+    height: 120px;
+  }
+
+  .account_info, 
+  .account_form {
+    padding: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .profile_pic_div {
+    width: 100px;
+    height: 100px;
+    border-width: 3px;
+  }
+
+  .account_edit {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+
+  .account_edit_icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .account_input, 
+  select.account_input {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+/* Auth Page Styles */
+/* ======================= */
+/* LOGIN PAGE STYLES */
+/* ======================= */
+
+.auth_section {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background);
+  padding: 2rem;
+  background-image: url('/static/blood-donation-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.auth_container {
+  width: 100%;
+  max-width: 400px;
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: var(--shadow);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--primary-light);
+}
+
+.auth_container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background-color: var(--primary);
+}
+
+.login_icon_div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+#login_icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.auth_container h1 {
+  color: var(--primary);
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.auth_input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: var(--card-bg);
+}
+
+.auth_input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-light);
+  outline: none;
+}
+
+.auth_input::placeholder {
+  color: var(--text-light);
+  opacity: 0.7;
+}
+
+.auth_button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.auth_button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.auth_container p {
+  color: var(--text);
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.auth_container a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.auth_container a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+/* Error Messages */
+.auth_container > div {
+  color: #D32F2F;
+  background-color: #FFEBEE;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  /* border-left: 4px solid #D32F2F; */
+}
+
+/* Responsive Design */
+@media screen and (max-width: 480px) {
+  .auth_section {
+    padding: 1rem;
+    background-image: none;
+    background-color: var(--background);
+  }
+  
+  .auth_container {
+    padding: 1.5rem;
+  }
+  
+  #login_icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .auth_container h1 {
+    font-size: 1.5rem;
+  }
+  
+  .auth_input {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.9rem;
+  }
+  
+  .auth_button {
+    padding: 0.7rem;
+  }
+}
+/* Registration Page Styles */
+
+/* ======================= */
+/* REGISTRATION PAGE STYLES */
+/* ======================= */
+
+/* Reuse auth_section styles from login page */
+.auth_section {
+  /* Inherits from login page styles */
+}
+
+.auth_container {
+  width: 100%;
+  max-width: 400px;
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: var(--shadow);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--primary-light);
+}
+
+.auth_container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background-color: var(--primary);
+}
+
+.auth_container h1 {
+  color: var(--primary);
+  margin: 0 0 1.5rem 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+}
+
+.auth_container h1::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background-color: var(--primary);
+  border-radius: 3px;
+}
+
+/* Input Fields */
+.auth_input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: var(--card-bg);
+}
+
+.auth_input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-light);
+  outline: none;
+}
+
+.auth_input::placeholder {
+  color: var(--text-light);
+  opacity: 0.7;
+}
+
+/* Password Strength Indicator */
+.password-strength {
+  width: 100%;
+  height: 4px;
+  background-color: #e0e0e0;
+  margin-bottom: 1.2rem;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.strength-meter {
+  height: 100%;
+  width: 0%;
+  background-color: #ff0000;
+  transition: width 0.3s, background-color 0.3s;
+}
+
+/* Register Button */
+.auth_button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0.5rem 0 1.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.auth_button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Sign In Link */
+.container.signin {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.container.signin p {
+  color: var(--text);
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.container.signin a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.container.signin a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+/* Error Messages */
+.auth_container > div {
+  color: #D32F2F;
+  background-color: #FFEBEE;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  border-left: 4px solid #D32  F2F;
+}
+
+/* Password Requirements */
+.password-requirements {
+  text-align: left;
+  margin: 0.5rem 0 1.5rem 0;
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+
+.password-requirements ul {
+  padding-left: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.password-requirements li {
+  margin-bottom: 0.3rem;
+  list-style-type: none;
+  position: relative;
+}
+
+.password-requirements li::before {
+  content: '•';
+  color: var(--primary);
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 480px) {
+  .auth_container {
+    padding: 1.8rem;
+  }
+  
+  .auth_container h1 {
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
+  }
+  
+  .auth_input {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .auth_button {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+  
+  .container.signin p {
+    font-size: 0.85rem;
+  }
+}
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
   .sidebar {
-    margin-top: 5px;
     width: 100%;
     height: auto;
     position: relative;
+    top: 0;
+    display: flex;
+    flex-wrap: wrap;
   }
-
+  
   .sidebar a {
-    float: left;
-  }
-  .appbar{
-    position: relative;
-  }
-  div.content {
-    margin-left: 0;
-    padding-top: 5px;
-  }
-  .auth_container{
-    height: 500px;
-    width: 380px;
-
-  }
-
-  .auth_input{
-    width: 250px;
-
-  }
-  .profile{
-
-    height: 300px;
-
-}
-.popup{
-
-  width: 350px;
-
-}
-.profile_pic{
-
-  width: 250px;
-  height: 250px;
-  border-radius: 100%;
-}
-
-}
-
-/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
-@media screen and (max-width: 412px) {
-  .sidebar a {
-    
+    flex: 1 0 auto;
     text-align: center;
-    float: left;
-    
-  }
-  .auth_container{
-    height: 450px;
-    width: 300px;
-
-  }
-  .appbar{
-    position: relative;
-  }
-  .auth_input{
-    width: 250px;
-
-  }
-  div.content {
-   padding-top: 5px;
   }
   
-  .profile{
-
-      height: 300px;
-
+  .content {
+    margin-left: 0;
+    padding-top: 20px;
   }
-  .popup{
-
-    width: 250px;
-    height: 300px;
   
+  .profile {
+    flex-direction: column;
   }
-  .profile_pic{
-
-    width: 200px;
-    height: 200px;
-    border-radius: 100%;
+  
+  .image_div {
+    width: 100%;
+    height: auto;
+    padding: 0;
   }
+  
+  .personimg {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+  }
+  
+  .auth_container {
+    width: 90%;
+    padding: 20px;
+  }
+}
 
+@media screen and (max-width: 480px) {
+  .sidebar a {
+    flex: 1 0 100%;
+  }
+  
+  .popup-content {
+    width: 95%;
+    padding: 16px;
+  }
+  
+  .profile_pic_div {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+/* ======================= */
+/* ABOUT PAGE STYLES */
+/* ======================= */
+
+.about-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.about-image {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+
+.mission-statement {
+  font-size: 1.2rem;
+  color: var(--primary);
+  font-weight: 500;
+  margin: 20px 0;
+  padding: 15px;
+  background-color: var(--primary-light);
+  border-radius: 8px;
+  border-left: 4px solid var(--primary);
+}
+
+.about-section {
+  margin: 40px 0;
+  padding: 20px;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.about-section h3 {
+  color: var(--primary);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--primary-light);
+}
+
+.feature-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.feature-card {
+  flex: 1;
+  min-width: 250px;
+  padding: 20px;
+  background-color: var(--background);
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.3s;
+  border: 1px solid var(--border);
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.feature-icon {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 15px;
+  background-color: var(--primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 20px;
+  background-color: var(--primary-light);
+  border-radius: 8px;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary);
+  margin-bottom: 5px;
+}
+
+.contact-button {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 20px;
+}
+
+.contact-button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .feature-cards {
+    flex-direction: column;
+  }
+  
+  .about-section {
+    padding: 15px;
+  }
+  
+  .mission-statement {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .about-header {
+    margin-bottom: 20px;
+  }
+}
+/* About Page Developer Credit Styles */
+.developer-credit {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: var(--primary-light);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.developer-credit a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+}
+
+.developer-credit a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
 }
