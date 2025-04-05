@@ -70,9 +70,9 @@ def get_lat_lon(address):
     
     try:
         response = requests.get(url, headers=headers, timeout=10)  # Timeout added
-        print(address)
-        print(response)
-        print(f"Status Code: {response.status_code}")  # Debugging
+        # print(address)
+        # print(response)
+        # print(f"Status Code: {response.status_code}")  # Debugging
         # print(f"Response Text: {response.text}")  # Debugging
         
         if response.status_code == 200 and response.text.strip():
@@ -93,7 +93,7 @@ def get_lat_lon(address):
 
 def haversine(lat1, lon1, lat2, lon2):
 
-    print(lat1,lat2,lon1,lon2)
+    # print(lat1,lat2,lon1,lon2)
     if None in [lat1, lon1, lat2, lon2]:
         return 100000000
     # Radius of the Earth in km
@@ -171,7 +171,7 @@ def main_page(request):
         address = f"{subdistrict},{district},{division}"
         
         latitude , longitude = get_lat_lon(address)
-        print(str(latitude) + str(longitude) + "saboj")
+        # print(str(latitude) + str(longitude) + "saboj")
 
 
         filters = {}
@@ -180,8 +180,8 @@ def main_page(request):
         if blood_group:
             filters['blood_group'] = blood_group
         
-        print(blood_group)
-        print(latitude, longitude)
+        # print(blood_group)
+        # print(latitude, longitude)
         # Filter people who donated at least 4 months ago
         filters['lastdonate__lte'] = timezone.now().date() - relativedelta(days=4*30)
         filtered_ids = Person.objects.filter(**filters).values_list('id', flat=True)
@@ -197,7 +197,8 @@ def main_page(request):
             distance = haversine(float(latitude), float(longitude), float(invidual.latitude), float(invidual.longitude))
             if distance <= 30:
              queryset.append(invidual)
-        
+    
+    # print(queryset)
     context = {'person': queryset, 'country': country_data}
     return render(request, 'main_page.html', context)
        
