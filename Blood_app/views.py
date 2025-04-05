@@ -195,7 +195,7 @@ def main_page(request):
             if None in [latitude, longitude, invidual.latitude, invidual.longitude]:
                 continue
             distance = haversine(float(latitude), float(longitude), float(invidual.latitude), float(invidual.longitude))
-            if distance <= 100:
+            if distance <= 30:
              queryset.append(invidual)
         
     context = {'person': queryset, 'country': country_data}
