@@ -14,8 +14,8 @@ from dateutil.relativedelta import relativedelta
 from datetime import timedelta
 import random
 import requests
-sys.path.append(r'D:\Django\Rokto Dorkar\Blood_app')
-from country import country_data
+
+from Blood_app.country import country_data
 
 User = get_user_model()
 
