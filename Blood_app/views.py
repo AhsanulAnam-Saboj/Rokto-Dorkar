@@ -14,10 +14,7 @@ from dateutil.relativedelta import relativedelta
 from datetime import timedelta
 import random
 import requests
-
 from Blood_app.country import country_data
-from Accounts.models import CustomUser
-from Accounts.manager import UserManager
 
 
 User = get_user_model()
@@ -43,6 +40,8 @@ def login_page(request):
 
     return render(request,'login_page.html')
 
+
+
 def logout_page(request):
 
     logout(request)
@@ -50,66 +49,25 @@ def logout_page(request):
     
 
 
-# def registration_page(request):
-#     if request.method == "POST":
-#         phone_number = request.POST.get('phone_number')
-#         password = request.POST.get('password')
-#         user = User.objects.filter(phone_number = phone_number)
-#         if user.exists():
-#             messages.info(request,'Phone number already exists')
-#             return redirect('registration_page')
-#         user = User.objects.create(
-#             phone_number = phone_number
-#         )
-#         user.set_password(password)
-#         user.save()
-#         messages.info(request,'User created successfully')
-#         return redirect('login_page')
-    
-#     return render(request,'registration_page.html')
-
-
-# notun
-
 def registration_page(request):
-    if request.user.is_authenticated:
-        return redirect('main_page')
-        
-    no_superusers = not CustomUser.objects.filter(is_superuser=True).exists()
-    
     if request.method == "POST":
         phone_number = request.POST.get('phone_number')
         password = request.POST.get('password')
-        
-        if CustomUser.objects.filter(phone_number=phone_number).exists():
-            messages.error(request, 'Phone number already exists')
+        user = User.objects.filter(phone_number = phone_number)
+        if user.exists():
+            messages.info(request,'Phone number already exists')
             return redirect('registration_page')
-        
-        try:
-            if no_superusers:
-                user = CustomUser.objects.create_superuser(
-                    phone_number=phone_number,
-                    password=password,
-                    is_staff=True,
-                    is_active=True
-                )
-                messages.success(request, 'Admin account created successfully!')
-            else:
-                user = CustomUser.objects.create_user(
-                    phone_number=phone_number,
-                    password=password
-                )
-                messages.success(request, 'Account created successfully')
-                
-            return redirect('login_page')
-            
-        except Exception as e:
-            messages.error(request, f'Error creating account: {str(e)}')
-            return redirect('registration_page')
-            
-    return render(request, 'registration_page.html', {
-        'creating_superuser': no_superusers
-    })
+        user = User.objects.create(
+            phone_number = phone_number
+        )
+        user.set_password(password)
+        user.save()
+        messages.info(request,'User created successfully')
+        return redirect('login_page')
+    
+    return render(request,'registration_page.html')
+
+
 
 def get_lat_lon(address):
     url = f"https://nominatim.openstreetmap.org/search?q={address}&format=json"
