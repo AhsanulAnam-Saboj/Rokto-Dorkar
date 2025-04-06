@@ -26,6 +26,7 @@ from Blood_app.views import account_page, main_page,login_page,registration_page
 urlpatterns = [
     # Admin URL
     path('admin/', admin.site.urls),
+    path('', main_page, name='main_page'),
     
     # Application URLs
     path('account_page/', account_page, name='account_page'),
