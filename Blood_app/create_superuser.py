@@ -1,23 +1,31 @@
 import os
 import django
+from django.contrib.auth import get_user_model
 from django.core.management import call_command
 from django.conf import settings
 
+# Set up Django environment
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Blood.settings")
 django.setup()
 
-# Provide the superuser credentials
+# Superuser credentials
 username = '01739640467'
-password = '1999@saboj'
+email = 'ahsanulanamsaboj1999@gmail.com'
+password = '1999s@boj'
 
 try:
-    # Try to get the user; if it exists, do nothing
-    from django.contrib.auth.models import User
+    User = get_user_model()  # This will get your custom user model if you have one
+    
     if not User.objects.filter(username=username).exists():
-        # Create the superuser if it doesn't exist
-        User.objects.create_superuser(username=username, email=email, password=password)
-        print("Superuser created successfully.")
+        # Create the superuser
+        User.objects.create_superuser(
+            username=username,
+            email=email,
+            password=password
+        )
+        print(f"Superuser '{username}' created successfully.")
     else:
-        print("Superuser already exists.")
+        print(f"Superuser '{username}' already exists.")
+        
 except Exception as e:
     print(f"Error creating superuser: {str(e)}")
