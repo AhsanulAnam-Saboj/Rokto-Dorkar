@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: rokto-dorkar-web
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn Blood.wsgi"
+    postDeployCommand: "python create_superuser.py"
