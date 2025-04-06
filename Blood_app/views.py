@@ -19,53 +19,53 @@ from Blood_app.country import country_data
 
 User = get_user_model()
 
-def login_page(request):
+def login(request):
 
     if request.method == "POST":
         phone_number = request.POST.get('phone_number')
         password = request.POST.get('password')
         if not User.objects.filter(phone_number=phone_number).exists():
             messages.info(request,'User not exist')
-            return redirect('login_page')
+            return redirect('login')
         
         user = authenticate(phone_number = phone_number,password = password)
         # print('Kortamni')
         if user is None:
             messages.info(request,'Invalid Password')
-            return redirect('login_page')
+            return redirect('login')
         else:
             login(request,user)
-            return redirect('main_page')
+            return redirect('home')
 
 
-    return render(request,'login_page.html')
+    return render(request,'login.html')
 
 
 
-def logout_page(request):
+def logout(request):
 
     logout(request)
-    return redirect('login_page')
+    return redirect('login')
     
 
 
-def registration_page(request):
+def signup(request):
     if request.method == "POST":
         phone_number = request.POST.get('phone_number')
         password = request.POST.get('password')
         user = User.objects.filter(phone_number = phone_number)
         if user.exists():
             messages.info(request,'Phone number already exists')
-            return redirect('registration_page')
+            return redirect('signup')
         user = User.objects.create(
             phone_number = phone_number
         )
         user.set_password(password)
         user.save()
         messages.info(request,'User created successfully')
-        return redirect('login_page')
+        return redirect('login')
     
-    return render(request,'registration_page.html')
+    return render(request,'signup.html')
 
 
 
@@ -120,8 +120,8 @@ def haversine(lat1, lon1, lat2, lon2):
     return distance
 
 
-@login_required(login_url="/login_page")
-def account_page(request):
+@login_required(login_url="/login")
+def profile(request):
     
     person,created = Person.objects.get_or_create(user=request.user)
     if request.method =="POST":
@@ -152,7 +152,7 @@ def account_page(request):
         person.latitude = latitude
         person.save()
 
-        return redirect('account_page')
+        return redirect('profile')
     
   
     context =  {
@@ -160,10 +160,10 @@ def account_page(request):
          'person': person,
       }
     
-    return render(request , 'account_page.html',context)
+    return render(request , 'profile.html',context)
 
-@login_required(login_url="/login_page")
-def main_page(request):
+@login_required(login_url="/login")
+def home(request):
     queryset = Person.objects.all().order_by('-id')[:200]
     
     # print(queryset)
@@ -205,9 +205,9 @@ def main_page(request):
     
     # print(queryset)
     context = {'person': queryset, 'country': country_data}
-    return render(request, 'main_page.html', context)
+    return render(request, 'home.html', context)
        
 
-def about_page(request):
+def about(request):
     
-    return render(request,'about_page.html')
+    return render(request,'about.html')
