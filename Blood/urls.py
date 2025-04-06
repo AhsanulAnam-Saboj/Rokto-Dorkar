@@ -21,20 +21,20 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 # Import views from the Blood_app
-from Blood_app.views import account_page, main_page,login_page,registration_page,logout_page,about_page
+from Blood_app.views import profile, home,login,signup,logout,about
 
 urlpatterns = [
     # Admin URL
     path('admin/', admin.site.urls),
-    path('', main_page, name='main_page'),
+    path('', home, name='home'),
     
     # Application URLs
-    path('account_page/', account_page, name='account_page'),
-    path('main_page/', main_page, name='main_page'),
-    path('login_page/',login_page,name="login_page"),
-    path('logout_page/',logout_page,name="logout_page"),
-    path('registration_page/',registration_page,name="registration_page"),
-    path('about_page/',about_page,name='about_page')
+    path('profile/', profile, name='profile'),
+    path('home/', home, name='home'),
+    path('login/',login,name="login"),
+    path('logout/',logout,name="logout"),
+    path('signup/',signup,name="signup"),
+    path('about/',about,name='about')
     
 ]
 
