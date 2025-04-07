@@ -5,7 +5,7 @@ from .models import Person,User
 
 
 class PersonAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'age', 'mobile_number', 'blood_group', 'division', 'district', 'subdistrict', 'lastdonate','longitude','latitude')
+    list_display = ('id', 'name', 'age', 'mobile_number', 'person_image','blood_group', 'division', 'district', 'subdistrict', 'lastdonate','longitude','latitude')
 
 
 admin.site.register(Person, PersonAdmin)
