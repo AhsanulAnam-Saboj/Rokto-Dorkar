@@ -12,7 +12,7 @@ function togglePopup() {
     }
 }
 function home(){
-    window.location.href = 'https://rokto-dorkar.onrender.com/home/';
+    window.location.href = 'https://rokto-dorkar.onrender.com';
 }
 
 const country = JSON.parse(document.getElementById('country').textContent);
