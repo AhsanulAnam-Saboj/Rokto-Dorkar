@@ -11,10 +11,8 @@ function togglePopup() {
         popup.style.display = "block";
     }
 }
-function home_page(){
-
-    window.location.href = 'http://192.168.1.116:8000/home/';
-
+function home(){
+    window.location.href = 'https://rokto-dorkar.onrender.com/home/';
 }
 
 const country = JSON.parse(document.getElementById('country').textContent);
