@@ -15,7 +15,8 @@ from datetime import timedelta
 import random
 import requests
 from Blood_app.country import country_data
-
+from django.contrib.auth import logout as auth_logout
+from django.contrib.auth import login as auth_login
 
 User = get_user_model()
 
@@ -34,7 +35,7 @@ def login(request):
             messages.info(request,'Invalid Password')
             return redirect('login')
         else:
-            login(request,user)
+            auth_login(request,user)
             return redirect('home')
 
 
@@ -43,9 +44,8 @@ def login(request):
 
 
 def logout(request):
-
-    logout(request)
-    return redirect('login')
+    auth_logout(request)  # Use Django's logout function
+    return redirect('login')  # Or wherever you want to redirect after logout
     
 
 
