@@ -104,3 +104,12 @@ Before setting up the project, make sure you have the following installed:
    ```bash
    python manage.py runserver
 
+## Support and Contact
+
+If you encounter any issues or need assistance during setup or usage, feel free to reach out for help. Here are the options for support:
+
+- **Email**: For more direct communication, you can contact me at: [Mail](mailto:ahsanulanamsaboj1999@gmail.com).
+- **LinkedIn**: You can also connect with me on [LinkedIn](https://www.linkedin.com/in/ahsanulanam) for support or inquiries.
+
+Your feedback and contributions are highly appreciated!
+
