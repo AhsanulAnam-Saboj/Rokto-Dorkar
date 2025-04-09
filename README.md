@@ -12,7 +12,7 @@ For a visual demonstration of **Rokto Dorkar**, you can check out our video demo
 ## Features
 
 ### User Capabilities
-## Features
+
 
 - **Authentication**: Users can create accounts and log in to the platform.
 - **Donor Search**: Users can search for available blood donors based on blood type, location, and other criteria. The search is location-based, helping users find nearby donors. The platform uses **OpenStreetMap API** to extract the user's and donor's **longitude** and **latitude**, and calculates the distance between them. If the distance is within **30 km**, the donor is considered available.
