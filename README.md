@@ -11,13 +11,15 @@ For a visual demonstration of **Rokto Dorkar**, you can check out our video demo
 ## Features
 
 ### User Capabilities
-- **Authentication**: Users can create accounts and log in.
-- **Blood Donation Requests**: Users can submit blood donation requests for different blood types.
-- **Donor Search**: Users can search for available blood donors based on blood type, location, etc.
-- **Admin Panel**: Admins can manage users, donation requests, and more.
-- **Notifications**: Users receive notifications when a match is found for blood donations.
-- **History**: Users can view their past donation and request history.
-- **Status**: Users can see the status of recent requests and donations.
+## Features
+
+- **Authentication**: Users can create accounts and log in to the platform.
+- **Donor Search**: Users can search for available blood donors based on blood type, location, and other criteria. The search is location-based, helping users find nearby donors.
+- **Donor Information**: Users can view the contact number of donors and see the location of the donor on the map using **OpenStreetMap API** for latitude and longitude, providing accurate location data. Donors also have profile pictures displayed along with their information.
+- **Donation History**: Users can view when a donor last donated blood, ensuring transparency and tracking of donations.
+- **Admin Panel**: Admins have the ability to manage users and monitor the entire platform.
+- **Request and Donation Status**: Users can check the availability of donations, providing real-time updates.
+
 
 ## Technology Stack
 
