@@ -92,14 +92,15 @@ Before setting up the project, make sure you have the following installed:
 
    ```bash
    pip install -r requirements.txt
-4. **Database Setup**:
+4.**Database Setup**:
 
-   **Rokto Dorkar** uses SQLite (or any other configured database) to store user data, blood donation requests, and more. To set up the database, you need to run the migrations that will create the necessary database tables.
+**Rokto Dorkar** uses **SQLite3**, which is Django's built-in database, to store user data, blood donation requests, and other relevant information. To set up the database, follow these steps:
 
-   To apply the migrations, run the following command:
+1. **Apply Migrations**: Django uses migrations to create the necessary database tables. To apply these migrations and set up the database, run the following command:
 
    ```bash
    python manage.py migrate
+
 
 5. **Start the Development Server**:
 
