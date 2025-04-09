@@ -1,12 +1,13 @@
 # Rokto Dorkar
 
 **Rokto Dorkar** is a web-based platform designed to manage blood donation needs. The platform connects blood donors with individuals in need of blood, making it easier for both parties to find and share life-saving blood. Built with **HTML**, **CSS**, **JavaScript**, and **Python Django**, the project aims to improve access to blood donation services.
-
+<!-- 
 ## Demo
 
 For a visual demonstration of **Rokto Dorkar**, you can check out our video demo here:
 
 [Video Demo Link]
+-->
 
 ## Features
 
@@ -15,7 +16,8 @@ For a visual demonstration of **Rokto Dorkar**, you can check out our video demo
 
 - **Authentication**: Users can create accounts and log in to the platform.
 - **Donor Search**: Users can search for available blood donors based on blood type, location, and other criteria. The search is location-based, helping users find nearby donors. The platform uses **OpenStreetMap API** to extract the user's and donor's **longitude** and **latitude**, and calculates the distance between them. If the distance is within **30 km**, the donor is considered available.
-- **Donor Information**: Users can view the contact number of donors and see the location of the donor on the map using **OpenStreetMap API** for latitude and longitude, providing accurate location data. Donors also have profile pictures displayed along with their information.
+- **Donor Information**: Users can view the contact number of donors and see the location of the donor. 
+ Donors also have profile pictures displayed along with their information.
 - **Donation History**: Users can view when a donor last donated blood, ensuring transparency and tracking of donations.
 - **Admin Panel**: Admins have the ability to manage users and monitor the entire platform.
 - **Request and Donation Status**: Users can check the availability of donations, providing real-time updates.
