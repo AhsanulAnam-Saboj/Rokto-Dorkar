@@ -46,3 +46,61 @@ Before setting up the project, make sure you have the following installed:
    ```bash
    git clone https://github.com/AhsanulAnam-Saboj/Rokto-Dorkar.git
    cd Rokto-Dorkar
+
+2. **Create and Activate a Virtual Environment**:
+
+   It is recommended to use a virtual environment to manage project dependencies. To create and activate the virtual environment, follow these steps:
+
+   - **On Windows**:
+     1. Open your command prompt or terminal in the project's directory.
+     2. Run the following command to create a virtual environment:
+
+        ```bash
+        python -m venv venv
+        ```
+
+     3. To activate the virtual environment, run:
+
+        ```bash
+        venv\Scripts\activate
+        ```
+
+   - **On macOS/Linux**:
+     1. Open your terminal in the project's directory.
+     2. Run the following command to create a virtual environment:
+
+        ```bash
+        python3 -m venv venv
+        ```
+
+     3. To activate the virtual environment, run:
+
+        ```bash
+        source venv/bin/activate
+        ```
+
+   After activating the virtual environment, your terminal should show the name of the virtual environment (e.g., `(venv)`), indicating that it is active.
+
+   **Note**: If the virtual environment is active, all Python and pip commands will use the environment's packages instead of system-wide ones.
+3. **Install Dependencies**:
+
+   After activating the virtual environment, you need to install all the required dependencies for the project. To do this, run the following command in your terminal:
+
+   ```bash
+   pip install -r requirements.txt
+4. **Database Setup**:
+
+   **Rokto Dorkar** uses SQLite (or any other configured database) to store user data, blood donation requests, and more. To set up the database, you need to run the migrations that will create the necessary database tables.
+
+   To apply the migrations, run the following command:
+
+   ```bash
+   python manage.py migrate
+
+5. **Start the Development Server**:
+
+   Once the dependencies are installed and the database is set up, you can start the development server to run the application locally. To start the server, use the following command:
+
+   ```bash
+   python manage.py runserver
+
